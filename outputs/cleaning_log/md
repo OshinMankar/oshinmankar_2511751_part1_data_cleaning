@@ -1,0 +1,46 @@
+*Cleaning Log*
+
+1) Missing Region
+
+Missing values in the region field were replaced with "Unknown".
+Affected Records: 25
+
+2) Missing Ship Mode
+
+Missing values in the ship_mode field were replaced with "Unknown".
+Affected Records: 21
+
+3) Missing Discount
+
+Missing discount values were replaced with 0 when related sales fields were valid.
+Affected Records: 18
+
+4) Negative Discount
+
+Records with discount values less than 0 were flagged as Invalid Discount.
+Affected Records: 15
+
+5) Discount Above Allowed Range
+
+Records with discount values greater than 1 (100%) were flagged as Invalid Discount.
+Affected Records: 8
+
+6) Cancelled Orders
+
+Cancelled orders were retained in the dataset but excluded from completed sales calculations.
+Affected Records: 145
+
+7) Failed Payments
+
+Orders with failed payment status were retained in the dataset but excluded from completed sales calculations.
+Affected Records: 69
+
+8) Refunded Orders
+
+Refunded orders were retained in the dataset and summarized separately from completed sales.
+Affected Records:  71
+
+9) Invalid Shipping Records
+
+Records where ship_date was earlier than order_date were flagged as Invalid Shipping Record.
+Affected Records: 165
