@@ -1,0 +1,123 @@
+# Data Cleaning Log
+
+## 1. Issues Found
+
+### Missing Values
+
+* Missing Region values: 25
+* Missing Ship Mode values: 21
+* Missing Discount values: 18
+* Missing Order Date values: 0
+* Missing Ship Date values: 0
+
+### Duplicate Records
+
+* Exact Duplicate Rows Found: 40
+* Duplicate Order IDs Found: 63
+* Conflicting Duplicate Records Flagged: 23
+
+### Discount Issues
+
+* Negative Discount Records: 15
+* Discount Above Allowed Range (>100%): 8
+
+### Date Issues
+
+* Ship Date Earlier Than Order Date: X
+* Invalid Date Records: X
+
+### Order Status Issues
+
+* Cancelled Orders: 145
+* Failed Payment Records: 69
+* Refunded Orders: 71
+
+---
+
+## 2. Cleaning Actions Performed
+
+* Trimmed leading and trailing spaces from text fields.
+* Standardized text case and formatting across categorical columns.
+* Removed unwanted special characters where applicable.
+* Standardized category and sub-category naming conventions.
+* Converted order_date and ship_date to a consistent date format.
+* Filled missing Region values with "Unknown".
+* Filled missing Ship Mode values with "Unknown".
+* Replaced missing Discount values with 0 when business rule conditions were satisfied.
+* Created calculated columns for sales, profit, profit margin, shipping delay, order month, and order year.
+* Created data quality validation and flagging columns.
+
+---
+
+## 3. Business Rules Applied
+
+### Missing Region
+
+* Missing Region values were replaced with "Unknown".
+
+### Missing Ship Mode
+
+* Missing Ship Mode values were replaced with "Unknown".
+
+### Missing Discount
+
+* Missing Discount values were treated as 0 when other sales-related fields were valid.
+
+### Negative Discount
+
+* Discount values below 0 were flagged as Invalid.
+
+### Discount Above Allowed Range
+
+* Discount values above 1 (100%) were flagged as Invalid.
+
+### Cancelled Orders
+
+* Retained in dataset but excluded from completed sales summaries.
+
+### Failed Payments
+
+* Retained in dataset but excluded from completed sales summaries.
+
+### Refunded Orders
+
+* Retained in dataset and summarized separately from completed sales.
+
+### Invalid Shipping Records
+
+* Records where ship_date occurred before order_date were flagged as Invalid Shipping Records.
+
+---
+
+## 4. Assumptions Made
+
+* Discount values are stored as decimal percentages (e.g., 0.20 = 20%).
+* Valid discount range is between 0 and 1 inclusive.
+* Missing Region and Ship Mode values can be safely categorized as "Unknown".
+* Duplicate Order IDs with differing information require manual review and should not be automatically removed.
+* Sales summaries should only include valid completed transactions.
+
+---
+
+## 5. Records Removed
+
+* Exact Duplicate Records Removed: 20
+* Total Records Removed: 20
+---
+
+## 6. Records Flagged
+
+* Duplicate Records Flagged for Review: 23
+* Invalid Discount Records: 
+* Invalid Shipping Records: X
+* Total Flagged Records: X
+
+---
+
+## 7. Limitations of the Cleaning Process
+
+* Duplicate records with conflicting information were flagged but not manually resolved.
+* Business rule validation was performed only on available fields.
+* Missing values were handled according to defined business rules and may require further business verification.
+* Sales and profit calculations assume source quantity, price, and cost fields are accurate.
+* Records flagged as warnings or invalid may require manual review before operational use.
